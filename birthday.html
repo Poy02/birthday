@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xena's Birthday ✨</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-glow: rgba(184, 140, 255, 0.4);
+      --accent-gold: #d4af37;
+      --glass: rgba(12, 12, 12, 0.8);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #050505;
+      color: white;
+      padding: 20px;
+    }
+
+    .animated-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: radial-gradient(circle at 30% 30%, #1a1a2e 0%, #000 100%);
+    }
+
+    .stardust {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.5;
+      filter: blur(0.5px);
+      animation: twinkle var(--duration) infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.1; transform: scale(0.8); }
+      50% { opacity: 0.7; transform: scale(1.1); }
+    }
+
+    .card {
+      position: relative;
+      z-index: 10; 
+      width: 100%;
+      max-width: 550px;
+      padding: 60px 40px;
+      border-radius: 4px;
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.9);
+      text-align: center;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 32px;
+      font-weight: 400;
+      letter-spacing: 14px;
+      margin-bottom: 5px;
+      color: #fff;
+    }
+
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--accent-gold);
+      margin: 25px auto 35px;
+      position: relative;
+      opacity: 0.6;
+    }
+
+    #typewriter {
+      font-family: 'Montserrat', sans-serif;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 15px;
+      line-height: 2.2;
+      letter-spacing: 1px;
+      margin-bottom: 45px;
+      font-weight: 200;
+      min-height: 220px;
+      white-space: pre-wrap; /* Keeps the spacing human-like */
+    }
+
+    .btn {
+      font-family: 'Cinzel', serif;
+      padding: 14px 40px;
+      background: transparent;
+      color: var(--accent-gold);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      font-size: 11px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn:hover {
+      background: var(--accent-gold);
+      color: #000;
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+    }
+
+    #msg {
+      margin-top: 35px;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--accent-gold);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+    }
+
+    .reveal {
+      opacity: 0.8 !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="animated-bg"></div>
+  <div id="star-container"></div>
+
+  <div class="card">
+    <h1>XENA</h1>
+    <div class="divider"></div>
+    
+    <div id="typewriter"></div>
+
+    <button class="btn" onclick="triggerMagic()">Initiate ⭐</button>
+    <div id="msg"></div>
+  </div>
+
+<script>
+  
+  const text = "Happy Birthday, my Aarya.\n\nI wanted to do something a little different for you this year, so I put this together. I hope you're having the kind of day that makes you truly smile.\n\nI also wanted to say honestly and from the heart that I'm so sorry for what my classmates did. It’s been on my mind a lot, and I really regret that it happened. You deserve so much better than that. \n\nEven though things are different now, I still think of you often. I really do miss you more than I can put into words. \n\nHappy Birthday!";
+  
+  let index = 0;
+  
+  function typeEffect() {
+    const target = document.getElementById("typewriter");
+    if (index < text.length) {
+      let char = text.charAt(index);
+      target.innerHTML += char;
+      index++;
+      
+      let speed = 50;
+      if (char === "." || char === "?" || char === "—") speed = 500;
+      if (char === ",") speed = 300;
+      
+      setTimeout(typeEffect, speed + (Math.random() * 20));
+    }
+  }
+
+  function createStars() {
+    const container = document.getElementById('star-container');
+    for (let i = 0; i < 100; i++) {
+      const star = document.createElement('div');
+      star.className = 'stardust';
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.top = Math.random() * 100 + 'vh';
+      const size = (Math.random() * 1.5 + 0.5) + 'px';
+      star.style.width = size;
+      star.style.height = size;
+      star.style.setProperty('--duration', (Math.random() * 4 + 3) + 's');
+      container.appendChild(star);
+    }
+  }
+
+  window.onload = () => {
+    setTimeout(typeEffect, 1000);
+    createStars();
+  };
+
+  function triggerMagic() {
+    const msg = document.getElementById("msg");
+    msg.innerHTML = "GUSTO PA RIN KITA!";
+    msg.classList.add("reveal");
+    
+    const card = document.querySelector('.card');
+    card.style.transition = "box-shadow 1s ease";
+    card.style.boxShadow = "0 0 80px rgba(212, 175, 55, 0.15)";
+  }
+</script>
+
+</body>
+</html>
+
